@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List</title>
+</head>
+<body>
+    <h1>Shopping List</h1>
+    <ul></ul>
+    <script>
+        const electron= require('electron');
+    const {ipcRenderer}=electron;
+    const ul=document.querySelector('ul');
+    ipcRenderer.on('items',(e,item)=>{
+        const li=document.createElement('li');
+        const itemtext=document.createTextNode(item);
+        li.appendChild(itemtext);
+        ul.appendChild(li)
+
+    });
+
+    ipcRenderer.on('clearitems',()=>{
+        ul.innerHTML='';
+    })
+
+    ul.addEventListener('dblclick',(e)=>{
+        e.target.remove();
+         
+    })
+
+    </script>
+</body>
+</html>
